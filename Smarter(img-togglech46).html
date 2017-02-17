@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+
+    <style>
+        img#move_around {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+
+        button#stop_it {
+            position: absolute;
+            top: 150px;
+            left: 250px;
+        }
+    </style>
+</head>
+<body>
+    <!--
+
+    A SMARTER WAY TO LEARN jQuery
+    CHAPTER 46 DEMO
+
+    When the user clicks the button, all animations stop.
+
+    -->
+
+    <button id="stop_it">Stop it!</button>
+    <button id="start_it">Start it!</button>
+    <img src="http://www.asmarterwaytolearn.com/jquery/swirl.png" id="move_around" alt="swirl" width="150" height="150"><br>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript">
+    </script>
+    <script>
+        $("img#move_around").animate({ left: "70%" }, 5000).animate({ left: "0%" }, 5000).animate({ left: "70%" }, 10).animate({ left: "0%" }, 10);
+        $("button#stop_it").on("click", function () {
+            $("img#move_around").stop(false, true, false);
+
+        });
+    </script>
+</body>
+</html>

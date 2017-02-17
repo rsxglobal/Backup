@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <script type="text/javascript">
+        sabio.page.startUp = function () {
+            console.log("firing");
+            $("#submit").on("click",
+                sabio.page.btnSubmit);
+            $(".comments").on("click", ".reply",
+                sabio.page.handlers.replyLink);
+            $("#myModal").on("click",
+                sabio.page.handlers.replyLink);
+            $("#myModal").on("hidden.bs.model",
+                sabio.page.handlers.modal.Closing);
+
+        }
+        sabio.page.handlers.modalClosing = function () {
+            sabio.page.clearForm();
+            sabio.page.activereplyLink = null;
+        }
+        sabio.page.handlers.btnSubmit = function (e) {
+            e.preventDefault();
+            var data = sabio.page.readValues();
+            sabio.page.setValues(data);
+            sabio.page.clearForm();
+        }
+        sabio.page.handlers.replyLink = function (e) {
+            e.preventDefault();
+            sabio.page.activereplyLink = this;
+            sabio.page.openreplyForm();
+        }
+        sabio.page.clearForm = function () {
+
+            var activeForm = $("#frmContainer");
+            if (sabio.page.activereplyLink != null) {
+                activeForm = $(".modal-body");
+            }
+            activeForm.find("form")[0].reset();
+        }
+        sabio.page.readValues = function () {
+            var activeForm = $("#frmContainer");
+            if (sabio.page.activereplyLink != null) {
+                activeForm = $(".modal-body");
+            }
+        var title = $(".comment-title", activeForm).val();
+        var email = $(".comment-email", activeForm).val();
+        var content = (".cmt-body", activeForm).val();
+        var comment = {
+            title: title,
+            email: email,
+            content: content
+        }
+        return comment;
+        }
+        sabio.page.setValues = function (comment) {
+            var template = sabio.page.loadTemplate();
+            $(".media-heading", template).text
+                (comment.title);
+            template.find(".comment-meta a").text
+            (comment.email);
+            $(".comment-meta a", template).prop("href", "mailto:" + comment.email);
+            $(".comment-body p", template).text(comment.content);
+            if (sabio.page.activereplyLink == null )
+        }
+    </script>
+</body>
+</html>

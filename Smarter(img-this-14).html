@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+
+    <style>
+        h5 {
+  color: white;
+  background-color: grey;
+  font-family: arial, helvetica, sans-serif;
+  text-align: center;
+  padding: 2em;
+}
+    </style>
+</head>
+<body>
+    <!--
+
+    A SMARTER WAY TO LEARN jQuery
+    CHAPTER 14 DEMO
+
+    The background color changes when the user mouses over the heading, and changes back to grey when she mouses out.
+
+    Don't concern yourself yet with the function code. Focus on the selector $(this).
+
+    Feel free to play around with the CSS styling in the code and see what happens.
+
+    -->
+
+    <h5>This background-color changes when the user mouses over it.</h5>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <script type="text/javascript">
+    </script>
+    <script>
+        $("h5").on("mouseover", function () {
+            $(this).css("background-color", "red");
+        });
+        $("h5").on("mouseout", function () {
+            $(this).css("background-color", "grey");
+        });
+    </script>
+</body>
+</html>

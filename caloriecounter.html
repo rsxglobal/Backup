@@ -1,0 +1,428 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sabio - AJAX Lab Exercise</title>
+
+    <!-- Custom styles for this template -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        html body {
+            background-color: #2e652e;
+        }
+        .btn-success:active {
+            background-color: red;
+        }
+
+        .box {
+            background-color: white;
+        }
+
+        .col1 .col2 col3 {
+            float: left;
+        }
+
+        .form-control, .control-label {
+            display: none;
+        }
+
+        a.navbar-brand {
+            font-weight: 100;
+            margin-top: 10px;
+            padding: 0px 9px;
+            line-height: 21px;
+            text-transform: uppercase;
+            font-size: 29px;
+            display: block;
+            float: left;
+            height: 60px;
+            line-height: 60px;
+            font-family: 'Open Sans', Tahoma, sans-serif;
+        }
+
+        assessment-theme.css:91 .navbar-brand, .navbar-nav > li > a {
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+        }
+
+        a.navbar-brand span {
+            float: left;
+            height: 20px;
+            line-height: 20px;
+        }
+
+        a.navbar-brand small {
+            color: green;
+            font-size: 13px;
+            height: 20px;
+            line-height: 20px;
+            font-weight: 100;
+            text-transform: none;
+            font-family: "Pacifico", Monaco, Consolas, monospace;
+        }
+
+        .listing-row {
+            background-color: #f5f5f5;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-radius: 7px;
+        }
+
+        #left {
+            float: left;
+            width: 50%;
+            min-height: 600px;
+            padding: 19px;
+            padding-right: 30px;
+            margin-bottom: 20px;
+            border: 1px solid #e3e3e3;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+            background-color: rgba(186, 112, 59, 0.88);
+        }
+
+        #right {
+            float: right;
+            width: 45%;
+            min-height: 600px;
+            padding: 19px;
+            padding-right: 30px;
+            margin-bottom: 20px;
+            border: 1px solid #e3e3e3;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+            background-color: rgba(186, 112, 59, 0.88);
+        }
+
+        .name {
+            font-weight: bold;
+            color: royalblue;
+        }
+
+        .btn {
+            display: table-cell;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="register.html" class="navbar-brand ">
+                    <span class="logo">
+                        <strong>Sabio<br /></strong>
+                        <small>AJAX Lab Exercise</small>
+                    </span>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right visible-xs"></ul>
+                <div class="nav navbar-nav navbar-right hidden-xs">
+                    <div class="row">
+                        <div class="pull-right">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <fieldset id="left">
+        <!-- Author form -->
+
+        <div class="control-group hidden">
+            <label class="control-label">New Item</label>
+            <div class="controls">
+                <input type="text" class="form-control" id="newItem" placeholder="Enter Name of new Item..." />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Number</label>
+            <div class="controls">
+                <input type="text" class="form-control" id="number" placeholder="Enter number of items..." />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Total Calories</label>
+            <div class="controls">
+                <input type="text" class="form-control" id="calories" placeholder="Enter calories ..." />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Total Fat</label>
+            <div class="controls">
+                <input type="text" class="form-control" id="fat" placeholder="Enter salary..." />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Total Carbs</label>
+            <div class="controls">
+                <input type="text" class="form-control" id="carbs" placeholder="Enter carbs... " />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Total Protein</label>
+            <div class="controls">
+                <input type="text" class="form-control" id="protein" placeholder="Enter protein..." />
+            </div>
+        </div>
+        <div class="control-group padtop row ">
+
+            <div class="controls text-center">
+                <br />
+                <br />
+                <div class="btn-group-vertical col1">
+                    <input type="button" id="submit" class="btn btn-primary addAuthor refresh" value="Add New Item" />
+                    <br />
+                    <input type="button" id="grapefruit" class="btn btn-success refresh" value="Add Grapefruit" />
+                    <br />
+                    <input type="button" id="egg" class="btn btn-success refresh" value="Add Egg" />
+                    <br />
+                    <input type="button" id="hamburger" class="btn btn-success refresh" value="Add Hamburger" />
+                    <br />
+                    <input type="button" id="chicken" class="btn btn-success refresh" value="Add 1 Cup Chicken" />
+                    <br />
+                    <input type="button" id="wine" class="btn btn-success refresh" value="1 Glass" />
+                </div>
+                <div class="btn-group-vertical col2">
+                    <input type="button" id="submit" class="btn btn-primary addAuthor refresh" value="Add New Item" />
+                    <br />
+                    <input type="button" id="grapefruit" class="btn btn-success refresh" value="Add Grapefruit" />
+                    <br />
+                    <input type="button" id="egg" class="btn btn-success refresh" value="Add Egg" />
+                    <br />
+                    <input type="button" id="hamburger" class="btn btn-success refresh" value="Add Hamburger" />
+                    <br />
+                    <input type="button" id="chicken" class="btn btn-success refresh" value="Add 1 Cup Chicken" />
+                    <br />
+                    <input type="button" id="wine" class="btn btn-success refresh" value="1 Glass" />
+                </div>
+                <div class="btn-group-vertical col3">
+                    <input type="button" id="submit" class="btn btn-primary addAuthor refresh" value="Add New Item" />
+                    <br />
+                    <input type="button" id="grapefruit" class="btn btn-success refresh" value="Add Grapefruit" />
+                    <br />
+                    <input type="button" id="egg" class="btn btn-success refresh" value="Add Egg" />
+                    <br />
+                    <input type="button" id="hamburger" class="btn btn-success refresh" value="Add Hamburger" />
+                    <br />
+                    <input type="button" id="chicken" class="btn btn-success refresh" value="Add 1 Cup Chicken" />
+                    <br />
+                    <input type="button" id="wine" class="btn btn-success refresh" value="1 Glass" />
+                </div>
+
+                <!--<div class="controls text-center">
+                    <input type="button" id="addButton" value="Add" />
+                    <select>
+                        <option>Banana-105</option>
+                        <option>GrapeFruit-50</option>
+                        <option>Eggs-80</option>
+                    </select>
+                    <ul>
+                        <li>Default</li>
+                    </ul>
+                </div>-->
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset id="right">
+        <div class="blog-post col-md-6" id="postContainer">
+            <div class="form-group">
+                <label for="NewItem">Total Calories</label>
+                <textarea class="newItem form-control1" id="top"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="number">Number</label>
+                <label for="number" class="blog-post-email form-control" id="title">Author Email</a></label>
+            </div>
+
+            <div class="form-group">
+                <label for="content">New Item</label>
+                <br />
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12  hidden-sm pull-right listings">
+            <div id="author-list">
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 col-xs-12">
+                    <p><strong>&copy; Sabio 2017</strong></p>
+                    <p>All rights reserved</p>
+                </div>
+                <div class="col-sm-8 col-xs-12">
+                    <p class="footer-links">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input type="button" id="addButton" value="Add" />
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script src="http://sabioapi2.azurewebsites.net/scripts/sabio.js"></script>
+
+    <!-- All your code goes below here-->
+    <script type="text/javascript">
+        var grapefruit = 100; var egg = 80; var hamburger = 209; var chicken = 335; var wine = 123;
+        var arr = [];
+        var sump;
+
+        sabio.page.url = "http://sabioapi2.azurewebsites.net/api/authors/";
+        var arr = [];
+        sabio.page.startUp = function () {
+            console.log("Jquery is ready");
+            $("#egg").on('click',sabio.page.btn);
+            $("#grapefruit").on('click', sabio.page.btn2);
+            $("#hamburger").on('click', sabio.page.btn3);
+            $("#chicken").on('click', sabio.page.btn4);
+            $("#wine").on('click', sabio.page.btn5);
+
+        }
+
+        sabio.page.btn = function () {
+            if (this.value == "Add Egg") this.value = "One Egg Added";
+
+            //if (this.value == "Two Eggs Added") this.value = "Three Eggs Added"
+
+            arr.push(egg);
+            sump = arr.reduce(function (a, b) { return a + b; }, 0);
+            sump.toString();
+            $(".newItem").html(sump);
+        }
+        sabio.page.btn2 = function () {
+            arr.push(grapefruit);
+            sump = arr.reduce(function (a, b) { return a + b; }, 0);
+            sump.toString();
+            $(".newItem").html(sump);
+        }
+        sabio.page.btn3 = function () {
+            arr.push(hamburger);
+            sump = arr.reduce(function (a, b) { return a + b; }, 0);
+            sump.toString();
+            $(".newItem").html(sump);
+        }
+        sabio.page.btn4 = function () {
+            arr.push(chicken);
+            sump = arr.reduce(function (a, b) { return a + b; }, 0);
+            sump.toString();
+            $(".newItem").html(sump);
+        }
+        sabio.page.btn5 = function () {
+            arr.push(wine);
+            sump = arr.reduce(function (a, b) { return a + b; }, 0);
+            sump.toString();
+            $(".newItem").html(sump);
+        }
+
+        //sabio.page.handlers.btngrapefruit = function () {
+        //    var grapefruit = 100;
+        //    $(".newItem").text(grapefruit);
+        //var a = [];
+
+        //$('.ui-btn').click(function () {
+        //    a.push($(this).val());
+        //    if (a.length == 6) {
+        //        alert("Hello! I am an alert box!!");
+        //    }
+        //});
+
+        //var a = [36, 46, 56, 66];
+        //var sum = a.reduce(function (a, b) { return a + b; }, 0);
+
+        //console.log(sum); // 6
+
+        //sabio.page.handlers.btnSubmit = function (event) {
+        //    event.preventDefault();
+        //    var newItem = sabio.page.readInput();
+        //    sabio.page.setInput(newItem);
+        //    //sabio.page.toggleForm();
+        //    $('form')[0].reset();//reset values
+        //}
+
+        sabio.page.readInput = function () {
+
+            var newItem = $("#newItem").val();
+            var number = $("#number").val();
+            var calories = $("#calories").val();
+            var fat = $("#fat").val();
+            var carbs = $("#carbs").val();
+            var protein = $("#protein").val();
+            var newFood = {
+                newItem: newItem,
+                number: number,
+                calories: calories,
+                fat: fat,
+                carbs: carbs,
+                protein: protein
+            }
+
+            return newFood;
+        }
+        sabio.page.setInput = function (newFood) {
+            //$(".newItem").text(newFood.newItem);
+            //$(".newvItem").text(newFood.number);
+            //$(".newvItem").text(newFood.calories);
+            //$(".newvItem").text(newFood.fat);
+            //$(".newvItem").text(newFood.carbs);
+            //$(".newvItem").text(newFood.protein);
+
+        }
+    </script>
+    <script type="text/html" id="template">
+        <div class="row  listing-row">
+            <div class="col-sm-offset-1 col-sm-9">
+
+                <p class="item">Item</p>
+                <p class="number">number</p>
+                <p class="calories">$ <strong>Calories</strong></p>
+                <p class="fat">$ <strong>Fat</strong></p>
+                <p class="carbs">$ <strong>Carbs</strong></p>
+                <p>ID: <span class="small">123123123</span></p>
+            </div>
+            <div class="col-sm-2">
+                <input type="button" class="delete pull-right btn btn-sm btn-danger" value="x" />
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+
+            <div class="col-sm-2">
+                <input type="button" class="pull-right btn btn-sm btn-success copyId" value="Copy ID" />
+            </div>
+        </div>
+    </script>
+</body>
+</html>

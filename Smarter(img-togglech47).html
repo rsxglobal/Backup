@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+
+    <style>
+        .nowhere_element {
+            display: none;
+            /*opacity: 0;*/
+        }
+    </style>
+</head>
+<body>
+    <img id="house_thumb" src="http://www.asmarterwaytolearn.com/jquery/house_thumbnail.jpg" alt="house" width="200" height="200">
+    <img id="house_big" class="nowhere_element" src="http://www.asmarterwaytolearn.com/jquery/house_full_size.jpg" alt="house" width="500" height="500">
+
+    <!--
+
+    A SMARTER WAY TO LEARN jQuery
+    CHAPTER 47 DEMO
+
+    When the user clicks the image, the class "nowhere_element" is toggled for both images, swapping them.
+
+    -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript">
+    </script>
+    <script>
+        $("img#house_thumb, img#house_big").on("click", function () {
+            $("img#house_thumb, img#house_big").toggleClass("nowhere_element");
+        });
+        //$("img#house_big, img#house_thumb").on("click", function () {
+        //    $("img#house_thumb, img#house_big").toggleClass("nowhere_element");
+
+        //    //$().toggleClass("nowhere_element");
+        //});
+    </script>
+</body>
+</html>

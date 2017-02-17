@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <script type="text/javascript">
+        sabio.page.startUp = function () {
+            var chesse = mynewcommentArray;
+
+            console.log("jq is firing");
+            sabio.processArray(chesse);
+            $("#submit, .cmdAddcomment").on("click",
+                sabio.page.handlers.btnSubmit);
+            $(".comments").on("click", ".reply",
+                sabio.page.page.handlers.replyLink);
+            $("#myModal").on("hidden.bs.modal",
+                sabio.page.handlers.modalClosing);
+        }
+        sabio.page.handlers.modalClosing = function () {
+            sabio.page.clearForm();
+            sabio.page.activeReplyLink = null;
+
+        }
+        sabio.page.handlers.btnSubmit = function (e) {
+            e.preventDefault();
+            var data = sabio.page.readValues();
+            sabio.page.setValues(data);
+            sabio.page.clearForm();
+
+        }
+        sabio.page.handlers.replyLink(e); {
+            e.preventDefault();
+            sabio.page.openReplyForm();
+            sabio.page.activeReplyLink = this; //equates to function a
+            //above
+
+        }
+        sabo.page.clearForm = function () {
+
+            var activeForm = $("#frmContainer");
+            if (sabio.page.activeReplyLink != null) {
+                activeForm = $(".modal-body")
+            }
+            activeForm.find("form")[0].reset();
+        }
+
+        sabio.page.readValues = function () {
+
+            var activeForm = $("#frmContainer");
+            if (sabio.page.replyLink != null) {
+                activeForm = $(".modal-body")
+            }
+            var title = $(".comment-title", activeForm).val();
+            var email = $(".comment-email", activeForm).val();
+            var content = $(".cmt-body", activeForm).val();
+            var data = {
+                title: title,
+                email: email,
+                content: content
+
+            };
+            return data;
+        }
+        sabio.page.processArray = function (commentArray,
+            targetElement) {
+            if (!commentArray) {
+                return;
+            }
+            for (var i = 0; i < commentArray.length; i++) {
+                var comment = commentArray[i];
+                var data = {
+                    title: comment.subject,
+                    email: comment.name,
+                    content: content.message
+                }
+                var newComment = sabio.page.setValues(data,
+                    targetElement);
+                if (comment.replies) {
+                    sabio.page.processArray(comment.replies,
+                        newComment);
+                }
+            }
+
+        }
+        sabio.page.loadTemplate = function () {
+            return $($("#template").html());
+        }
+        sabio.page.setValues = function () {
+
+            var template = sabio.page.loadTemplate();
+            $(".media-heading", template).text(comment.title);
+            template.find(".comment-meta a").text(comment.email);
+            $(".comment-meta a", template).prop("href", "mailto:" + comment.email);
+            $(".comment-body p", template).text(comment.content);
+            if (sabio.page.activeReplyLink == null && container == null) {
+                $(".comments").append(template);
+            }
+        }
+    </script>
+</body>
+</html>

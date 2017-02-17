@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+
+        var url = "http://sabioapi2.azurewebsites.net/api/authors/";
+        var dataReceived = function (data, status, xhr) {
+            console.log(JSON.stringify(data));
+        }
+        var requestFailed = function (xhr, status, errorThrown) {
+            console.log(status + "-" + errorThrown);
+        }
+        var getallAuthors = function () {
+            var settings = {
+                type: "GET",
+                success: dataReceived,
+                error: requestFailed
+            };
+            $.ajax(url, settings);
+        }
+        var getoneAuthor = function (id) {
+            var settings = {
+                type: "GET",
+                success: dataReceived,
+                error: requestFailed
+            };
+            $.ajax(url + id, settings);
+
+        }
+        var addAuthor = function (firstName, lastName, age, salary) {
+            var newAuthor = {
+                firstName: firstName,
+                lastName: lastName,
+                age: age,
+                salary: salary
+
+            }
+            var settings = {
+                type: "POST",
+                success: dataReceived,
+                error: requestFailed,
+                data: JSON.stringify(newAuthor),
+                contentType: "application/json"
+                //data: '{"title":"GET REAL","content":"some cool stuff","authorId": 1597200450}'
+            };
+            $.ajax(url, settings);
+
+        }
+        var updateAuthor = function (authorId, firstName, lastName, age, salary) {
+            var updatedAuthor = {
+                authorId: authorId,
+                firstName: firstName,
+                lastName: lastName,
+                age: age,
+                salary: salary
+
+            }
+            var settings = {
+                type: "PUT",
+                success: dataReceived,
+                error: requestFailed,
+                data: JSON.stringify(updatedAuthor),
+                contentType: "application/json"
+                //data: '{"title":"GET REAL","content":"some cool stuff","authorId": 1597200450}'
+            };
+            $.ajax(url + id, settings);
+        }
+        var deleteAuthor = function (id) {
+            var settings = {
+                type: "DELETE",
+                success: dataReceived,
+                error: requestFailed
+            };
+            $.ajax(url + id, settings);
+
+        }
+        var addAuthor2 = function (firstName, lastName, age, salary) {
+            //var newAuthor = {
+            //    firstName: firstName,
+            //    lastName: lastName,
+            //    age: age,
+            //    salary: salary
+
+            //}
+            var newAuthor = "firstName=Joe&lastname=Blow&age=22&salary=60000";
+            var settings = {
+                type: "POST",
+                success: dataReceived,
+                error: requestFailed,
+                data: newAuthor,
+                contentType: "application/x-www-form-urlencoded"
+                //data: '{"title":"GET REAL","content":"some cool stuff","authorId": 1597200450}'
+            };
+            $.ajax(url, settings);
+
+        }
+    </script>
+</body>
+</html>

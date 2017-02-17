@@ -1,0 +1,343 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Sabio - AJAX Lab Exercise</title>
+    <!-- Custom styles for this template -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        a.navbar-brand {
+            font-weight: 100;
+            margin-top: 10px;
+            padding: 0px 9px;
+            line-height: 21px;
+            text-transform: uppercase;
+            font-size: 29px;
+            display: block;
+            float: left;
+            height: 60px;
+            line-height: 60px;
+            font-family: 'Open Sans', Tahoma, sans-serif;
+        }
+
+        assessment-theme.css:91 .navbar-brand, .navbar-nav > li > a {
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+        }
+
+        a.navbar-brand span {
+            float: left;
+            height: 20px;
+            line-height: 20px;
+        }
+
+        a.navbar-brand small {
+            color: green;
+            font-size: 13px;
+            height: 20px;
+            line-height: 20px;
+            font-weight: 100;
+            text-transform: none;
+            font-family: "Pacifico", Monaco, Consolas, monospace;
+        }
+
+        .listing-row {
+            background-color: #f5f5f5;
+            margin-top: 10px;
+            padding-top: 10px;
+        }
+
+        fieldset {
+            min-height: 20px;
+            padding: 19px;
+            margin-bottom: 20px;
+            border: 1px solid #e3e3e3;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+        }
+
+        .name {
+            font-weight: bold;
+            color: royalblue;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="register.html" class="navbar-brand ">
+                    <span class="logo">
+                        <strong>Sabio<br /></strong>
+                        <small>AJAX Lab Exercise</small>
+                    </span>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right visible-xs"></ul>
+                <div class="nav navbar-nav navbar-right hidden-xs">
+                    <div class="row">
+                        <div class="pull-right">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>
+                    Manage Authors
+                </h3>
+                <div class="well">
+                    <p>
+                        REST API End Point - <a href="http://sabioapi2.azurewebsites.net/api/authors" target="_blank">http://sabioapi2.azurewebsites.net/api/authors</a>
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 pull-right ">
+                        <button type="button" class="pull-right btn btn-sm btn-warning" id="btnRefresh">Refresh Authors</button> <!--add id called btnRefresh-->
+                        <br />
+                        <hr />
+                    </div>
+                    <div class="col-sm-12 col-md-8">
+                        <form class="form-vertical">
+                            <!-- ".form-vertical"-->
+                            <fieldset>
+                                <!-- Author form -->
+                                <div>
+                                    <div class="control-group">
+                                        <label class="control-label">First Name</label>
+                                        <div class="controls">
+                                            <!-- INPUTBOX-->
+                                            <input type="text" id="firstName" class="form-control comment-title" placeholder="Enter First Name"> <!--"#enterFirstName"-->
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Last Name</label>
+                                        <div class="controls">
+                                            <!-- INPUTBOX-->
+                                            <input type="text" id="lastName" class="form-control comment-title" placeholder="Enter Last Name"> <!--"#enterLastName"-->
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Age</label>
+                                        <!-- INPUTBOX-->
+                                        <input type="text" id="age" class="form-control comment-title" placeholder="Enter Age"> <!--"#enterAge"-->
+                                        <p></p>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Salary</label>
+                                        <div class="controls">
+                                            <!-- INPUTBOX-->
+                                            <input type="text" id="salary" class="form-control comment-title" placeholder="Enter Salary"> <!--"#enterSalary"-->
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                    <div class="control-group padtop row ">
+                                        <div class="controls text-center">
+                                            <p></p>
+                                            <input type="button" id="userFormSubmit" class="btn btn-primary" value="Add Author" /> <!--This is the add button (id="userFormSubmit")-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="col-md-4 col-sm-12  hidden-sm pull-right listings">
+                        <div id="author-list">
+                            <!--This is where we're adding the authors to-->
+                            <!--These two are place holders
+                            --author-sidebar"
+                            <!-- SINGLE Author START
+                            <div class="row  listing-row">
+                                <div class="col-sm-offset-1 col-sm-9">
+                                    <p class="name">Joe Smith</p>
+                                    <p class="age">27 years</p>
+                                    <p class="salary">$ <strong>55000</strong></p>
+                                    <p>ID: <span class="small">123123123</span></p>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="button" class="delete pull-right btn btn-sm btn-danger" value="x" />
+                                </div>
+                            </div>
+                            <!-- SINGLE Author START
+                            <div class="row  listing-row">
+                                <div class="col-sm-offset-1 col-sm-9">
+                                    <p class="name">Joe Smith</p>
+                                    <p class="age">27 years</p>
+                                    <p class="salary">$ <strong>55000</strong></p>
+                                    <p>ID: <span class="small">123123123</span></p>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="button" class="delete pull-right btn btn-sm btn-danger" value="x" />
+                                </div>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 col-xs-12">
+                    <p><strong>&copy; Sabio 2017</strong></p>
+                    <p>All rights reserved</p>
+                </div>
+                <div class="col-sm-8 col-xs-12">
+                    <p class="footer-links">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://sabioapi2.azurewebsites.net/scripts/sabio.js"></script>
+    <!-- All your code goes below here-->
+    <script type="text/javascript">
+        // create a global variable to prevent the refresh button from appending to the list
+        //sabio.page.stopRefresh = null;
+        sabio.page.url = "http://sabioapi2.azurewebsites.net/api/authors/";
+
+        sabio.page.startUp = function () {
+            $("#btnRefresh").on("click", sabio.page.handlers.btnRefresh); // refresh button clicked
+            $("#userFormSubmit").on("click", sabio.page.handlers.btnAddAuthor); // to submit new author (id="userFormSubmit")
+            //$("#author-list").on("click", ".delete", sabio.page.btnDeleteAuthor); // delete author (".delete")
+        }
+        sabio.page.handlers.btnRefresh = function () {
+            sabio.page.getAllAuthors(); // call sabio.page.getAllAuthors()
+        }
+
+        // dataReceived function
+
+        sabio.page.handlers.btnAddAuthor = function () {
+
+            var firstName = $("#firstName").val();
+            var lastName = $("#lastName").val();
+            var age = $("#age").val();
+            var salary = $("#salary").val();
+            // call addAuthor and pass in as parameters
+            addAuthor(firstName, lastName, age, salary);
+            // reset form
+            $("form")[0].reset();
+
+        }
+        /*
+        // btnDeleteAuthor (class=".delete")
+        sabio.page.handlers.btnDeleteAuthor = function () {
+            //sabio.page.deleteAuthor(); // call sabio.page.deleteAuthor()
+            var author = $(this).closest(".listing-row"); // use this reference
+            var id = author.find("show small").text();
+            author.remove(); // removes author
+        }
+        */
+
+        // setValues
+        sabio.page.setValues = function (data) {
+            var template = sabio.page.loadTemplate(); //load template
+            $(".name", template).text(data.firtName + " " + data.lastName);
+            $(".age", template).text(data.age);
+            $(".salary", template).text(data.salary); //load comments
+            $(".small", template).text(data.id); //load comments
+            $("#author-list").prepend(template);
+
+        }
+        var addAuthor = function (firstName, lastName, age, salary) { // NOTE: use properties of author
+            var newAuthor = {
+                firstName: firstName,
+                lastName: lastName,
+                age: age,
+                salary: salary
+            }
+            var settings = {
+                type: "POST",
+                success: sabio.page.lognewAuthor, // NOTE: rename because it's due to conflicting names
+                error: sabio.page.requestFailed,
+                data: JSON.stringify(newAuthor),
+                contentType: "application/json" // NOTE: dealing with JSON instead of form-urlencoded
+            }
+            $.ajax(sabio.page.url, settings)
+        }
+        //sabio.page.lognewAuthor = function () {
+        //    console.log(data + '/' + status);
+        //}
+        sabio.page.getAllAuthors = function () {
+            var settings = {
+                type: "GET",
+                success: sabio.page.dataReceived, // NOTE: update the names to reflect the function
+                error: sabio.page.requestFailed // NOTE: update the names to reflect the function
+            };
+            $.ajax(sabio.page.url, settings)
+        }
+
+        // addAuthor
+        sabio.page.dataReceived = function (data, status, xhr) {
+            $("#author-list").empty(); // NOTE: to clear the list (refresh
+            for (var i = 0; i < data.items.length; i++) { // for loop goes in the dataReceived function
+                sabio.page.setValues(data.items[i]);
+            }
+
+        }
+
+        sabio.page.loadTemplate = function () {
+            return $($("#template").html());
+        }
+        /*
+        // deleteAuthor
+        sabio.page.deleteAuthor = function (id) {
+            var settings = {
+                type: "DELETE",
+                success: onAuthorDelete,
+                error: sabio.page.requestFailed,
+            }
+            $.ajax(sabio.page.url + id, settings)
+        }
+        */
+        sabio.page.requestFailed = function (xhr, status, errorThrown) {
+            console.log(status + "-" + errorThrown);
+        }
+    </script>
+
+    <!--Template-->
+    <script type="text/html" id="template">
+        <div class="row  listing-row">
+            <div class="col-sm-offset-1 col-sm-9">
+                <p class="name">Joe Smith</p>
+                <p class="age">27 years</p>
+                <p class="salary">$ <strong>55000</strong></p>
+                <p>ID: <span class="small">123123123</span></p>
+            </div>
+            <div class="col-sm-2">
+                <input type="button" class="delete pull-right btn btn-sm btn-danger" value="x" /> <!--Delete Button (".delete")-->
+            </div>
+        </div>
+    </script>
+</body>
+</html>
