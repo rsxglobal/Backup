@@ -1,0 +1,89 @@
+﻿!<!DOCTYPE html>
+<html>
+<body>
+    <script>
+
+sabio.page.startUp = function () {
+
+    $("#submit, .cmdAddComment").on("click", sabio.page.handlers.btnSubmit);
+        //the input of this handler is two different buttons targets (id:submit and class:cmdAddComment
+    $(".comments").on("click", ".reply", sabio.page.handlers.replyLink);
+    //removing .comments prevent the modal popup from opening
+            $("#myModal").on("hidden.bs.modal", sabio.page.handlers.modalClosing);
+        }
+        sabio.page.handlers.modalClosing = function () {
+            sabio.page.clearForm();
+            sabio.page.activeReplyLink = null;
+
+        }
+        sabio.page.handlers.btnSubmit = function (event) {
+            event.preventDefault();
+            var data = sabio.page.readValues();
+            sabio.page.setValues(data);
+            sabio.page.clearForm();
+            //$("form")[0].reset();
+
+
+            //sabio.page.activeReplyLink = null;
+        }
+        sabio.page.handlers.replyLink = function (event) {
+            event.preventDefault();
+            sabio.page.activeReplyLink = this;//target the reply link
+            sabio.page.openreplyForm();
+
+
+        }
+        sabio.page.clearForm = function () {
+            var activeForm = $("#frmContainer");
+            if (sabio.page.activeReplyLink != null) {
+                activeForm = $(".modal-body");
+            }
+            activeForm.find("form")[0].reset();
+
+        }
+        sabio.page.readValues = function () {
+            var activeForm = $("#frmContainer");
+            if (sabio.page.activeReplyLink != null) {
+                activeForm = $(".modal-body");
+            }
+            var title = $(".comment-title", activeForm).val();
+            var email = $(".comment-email", activeForm).val();
+            var content = $(".cmt-body", activeForm).val();
+            var comment = {
+                title: title,
+                email: email,
+                content: content
+            }
+            return comment;
+        }
+        sabio.page.setValues = function (comment) {
+            var template = sabio.page.loadTemplate();
+            $(".media-heading", template).text(comment.title);
+            template.find(".comment-meta a").text(comment.email);
+            $(".comment-meta a", template).prop("href", "mailto:" + comment.email);
+            $(".comment-body p", template).text(comment.content);
+            if (sabio.page.activeReplyLink == null){//noboy clicked the reply link
+                $(".comments").append(template);// appends to the bottoms
+            }
+            else {
+                var containerComment = $(sabio.page.activeReplyLink).closest(".comment");//appends to the parent element
+                $(containerComment).append(template);//template append in different places
+                $("#myModal").modal("hide");
+                //sabio.page.activeReplyLink = null;//do want to clear the bottom form don't need it anymore//
+            }
+            var numberofComments = $(".comment").length;
+            $(".comments h2.title").text("There are " + numberofComments + " comments!");
+
+
+        }
+        sabio.page.loadTemplate = function () {
+
+            return $($("#template").html());
+        }
+        sabio.page.openreplyForm = function () {
+            $("#myModal").modal("show");
+        }
+
+    </script>
+</body>
+</html>

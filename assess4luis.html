@@ -1,0 +1,121 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 101 Template</title>
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <h1>Simple Form</h1>
+
+
+    <a class="btn btn-primary cmdInstructions" role="button" data-toggle="collapse"
+       href="#instructions" aria-expanded="false"
+       aria-controls="instructions">
+        Show/Hide Instructions
+    </a>
+
+    <div id="instructions" class="collapse">
+        <div class="well instructions ">
+            <div>
+                <span class="label label-success label-as-badge">1</span>
+                <span>
+                    Read Values from input box First Name and Last Name
+                </span>
+            </div>
+
+            <div>
+                <span class="label label-success label-as-badge">2</span>
+                <span>
+                    On clicking button "Get Full Name", compute full name by concatenating First Name and Last Name and show in input box - Full Name<br />
+                </span>
+            </div>
+
+            <div>
+                <span class="label label-success label-as-badge">3</span>
+                <span>
+                    On clicking button "Send Greeting", show message "Good Evening! {full name}" as content of <strong>p</strong> tag with class "message" <br />
+                </span>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="container">
+        <form id="formPerson">
+            <div class="form-group">
+                <label for="forFirstName">First Name</label>
+                <input type="text" class="form-control" id="forFirstName" placeholder="First Name">
+            </div>
+            <div class="form-group">
+                <label for="forLastName">Last Name</label>
+                <input type="text" class="form-control" id="forLastName" placeholder="Last Name">
+            </div>
+
+            <button id="btnClick" class="btn btn-default">Get Full Name</button>
+            <div class="form-group">
+                <label for="forFullName">Full Name</label>
+                <input type="text" id="forFullName" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <input type="button" id="btnGreet" placeholder="Greetings!" value="Greetings" />
+                <p class="message"></p>
+
+            </div>
+
+
+        </form>
+    </div>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script src="http://sabioapi2.azurewebsites.net/scripts/sabio.js"></script>
+
+    <script type="text/javascript">
+
+        sabio.page.startUp = function () {
+            //$("#formPerson").on("submit", sabio.page.readValues);
+            $("#btnClick").on("click", sabio.page.readValues);
+            $("#btnGreet").on("click", sabio.page.btnGreet);
+        }
+
+        //var personFirst; //this creates global variables
+        //var personLast;
+
+        sabio.page.readValues = function (event) {
+            event.preventDefault();
+            var personFirst = $("#forFirstName").val();
+            var personLast = $("#forLastName").val();
+            var fullName = personFirst + " " + personLast;
+            $("#forFullName").val(fullName);
+        }
+
+        sabio.page.btnGreet = function () {
+            //$(".message").text("Good Evening " + personFirst + " " + personLast);
+            $(".message").text("Good Evening " +  $("#forFullName").val());
+        }
+
+
+
+
+    </script>
+
+</body>
+</html>

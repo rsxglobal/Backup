@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+
+        .btn {
+ color: white;
+ background-color: red;
+ border-color: darkred;
+}
+.btn:hover {
+ color: white;
+ background-color: mediumspringgreen;
+ border-color: darkOrange;
+}
+.btn:active,
+.btn:target {
+ color: white;
+ background-color: darkOrange;
+ border-color: darkOrange;
+}
+    </style>
+
+
+</head>
+
+<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <button type="button" class="btn-primary btn">Primary</button>
+    <button type="button" class="btn btn-outline-secondary">Secondary</button>
+    <button type="button" class="btn btn-outline-success">Success</button>
+    <button type="button" class="btn btn-outline-info">Info</button>
+    <button type="button" class="btn btn-outline-warning">Warning</button>
+    <button type="button" class="btn btn-outline-danger">Danger</button>
+    <button class="btn btn-danger" type="submit">Clone Me</button>
+    <p>
+        <div class="media media-item" id="template">
+            <div class="media-left">
+                <a href="#">
+                    <img class="media-object" id="firstDiv" src="http://sabio.la/images/Sabio100.png" alt="Learn To Code">
+                </a>
+                <h4 class="media-heading" id="firstText">Media heading repeating</h4>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+
+                console.log("jq");
+                $("button").click(function () {
+                    $("#firstDiv").clone().appendTo("#template");
+                    $("#firstText").clone().appendTo("#template");
+                });
+            });
+            //var loadTemplate = function () {
+
+            //    return $($("#template").html());
+            //}
+        </script>
+
+
+
+</body>
+</html>

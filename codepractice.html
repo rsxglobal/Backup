@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+
+
+    <script type="text/javascript">
+        sabio.page.startUp = function () {
+            $("#").on('click', sabio.page.handlers.btnXx);
+            $("#").on('click', sabio.page.handlers.btnYy );
+        }
+        sabio.page.handlers.btnXx = function (event) {
+            event.preventDefault();
+
+            var blog = sabio.page.readInput();
+            sabio.page.setInput(blog);
+        }
+        sabio.page.handlers.btnYy = function () {
+            sabio.page.toggleForm();
+        }
+        sabio.page.readInput = function () {
+            var vineyard = $('#vineyard').val();
+            var name = $('#name').val();
+            var price = $('#price').val();
+            var wine = {
+                vineyard: vineyard,
+                name: name,
+                price: price
+            };
+            $('.xclass').val('');
+            $('.yclass').removeClass('hidden');
+            return wine;
+        }
+        sabio.page.handlers.setInput = function (wine) {
+            $('.xpost').text(wine.vineyard);
+            $('.ypost').text(wine.name);
+            $('.zpost').text(wine.price);
+        }
+        sabio.page.toggleForm = function () {
+            $('#wineContainer').toggleClass('hidden');
+            $('#wineBarrel').toggle();
+        }
+
+
+    </script>
+</body>
+</html>

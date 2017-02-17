@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Sabio - JS</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /*.btn {
+            border-radius: 7px;
+            width: 175px;
+            height: 90px;
+        }*/
+    </style>
+</head>
+<body>
+
+        <div class="row">
+            <div class="col-md-12">
+                <input type="button" class="btn btn-success" id="id" value="Show Comments!" />
+            </div>
+            </div>
+            <button type="button" id="" class="btn btn-warning btn-lg">Clone</button>
+            <button type="button" class="btn btn-outline-primary">Primary</button>
+            <button type="button" class="btn btn-outline-secondary">Secondary</button>
+            <button type="button" class="btn btn-outline-success">Success</button>
+            <button type="button" class="btn btn-outline-info">Info</button>
+            <button type="button" class="btn btn-outline-warning">Warning</button>
+            <button type="button" class="btn btn-outline-danger">Danger</button>
+      <div class="container">
+
+    </div>
+    <p>
+        <div class="media media-item">
+            <div class="media-left">
+                <a href="#">
+                    <img class="media-object" id="firstDiv" src="http://sabio.la/images/Sabio100.png" alt="Learn To Code">
+                </a>
+                <h4 class="media-heading" id="firstText">Media heading repeating</h4>
+            </div>
+        </div>
+        
+        <script src="http://sabioapi2.azurewebsites.net/scripts/sabio.js">
+        </script>
+        <script type="text/javascript">
+            sabio.page.startUp = function () {
+                console.log("startup");
+                $('#id').on('click', sabio.page.handlers.btnClick);
+                if ('#id' != null) {
+                    sabio.page.loadTemplate()
+                }
+            }
+            sabio.page.handlers.btnClick = function () {
+                console.log('btn firing');
+                $("#firstDiv").clone().appendTo("#template");
+                $("#firstText").clone().appendTo("#template");
+            }
+
+
+
+       </script>
+        <script type="text/html"></script>
+            <!--really important for template ops-->
+
+
+
+    <span id="template"></span>
+
+
+
+
+</body>
+</html>
