@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <style>
+        div {
+            float: left;
+            background-color: burlywood;
+            padding: 10px;
+            width: 45%;
+            margin: 5px;
+        }
+        .big {
+            font-size: 1.2em;
+        }
+        .btn {
+            font-size: 1.3em;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>BLOG ENTRY SYSTEM</h1>
+        <h2>Author's Name:</h2>
+        <input type="text" id="authorName" placeholder="Name" />
+        <h2>Author's Email:</h2>
+        <input type="text" id="authorEmail" placeholder="Email" />
+        <h2>New Blog Content:</h2>
+        <input type="text" id="newblogPost" placeholder="Paste Blog Contents" />
+        <br /><br /><br />
+        <input type="button" id="getblogInfo" value="Load Blog Details" class="btn" />
+        <br /><br /><br />
+        <textarea class="getblogDetails hideable" rows="4" cols="100" style="margin-bottom:30px; width: 80%; height: 100px;" name="text"></textarea>
+        <br />
+        <input type="button" value="Post" id="getBlog" class="btn" />
+        <br /><br /><br />
+
+        <input type="button" value="Retrieve Post" id="getbackBlog" class="btn" />
+    </div>
+    <div class="hidden">
+        <h1>Your post have been saved!  Thanks</h1>
+        <textarea id="postBlog" rows="100" cols="400" style="margin-bottom:30px; width: 97%; height: 450px;" name="text"></textarea>
+    </div>
+    <br />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="http://sabioapi2.azurewebsites.net/scripts/sabio.js"></script>
+    <script>
+        sabio.page.startUp = function () {
+            $('.hidden').hide();
+            $("#getblogInfo").on('click', sabio.page.handlers.btngetblogInfo);
+            $("#getBlog").on('click', sabio.page.handlers.btngetBlog);
+            $("#getbackBlog").on('click', sabio.page.handlers.btngetbackBlog);
+            $('#authorName, #authorEmail, #newblogPost').addClass('hideable big');
+        }
+        sabio.page.handlers.btngetblogInfo = function () {
+            sabio.page.readValues();
+            sabio.page.setValues();
+        }
+        sabio.page.handlers.btngetBlog = function () {
+            var newPost = sabio.page.getBlog();
+            sabio.page.setBlog(newPost);
+            $('.hideable').hide();
+            $('.hidden').show();
+        }
+        sabio.page.handlers.btngetbackBlog = function () {
+            var newPost = sabio.page.getBlog();
+            sabio.page.setBlog('');
+            $('.hideable').show();
+            $('.hidden').hide();
+        }
+        sabio.page.readValues = function () {
+            var authorName = $('#authorName').val();
+            var authorEmail = $('#authorEmail').val();
+            var newblogPost = $('#newblogPost').val();
+            var data = {
+                authorName: authorName,
+                authorEmail: authorEmail,
+                newblogPost: newblogPost
+            };
+            sabio.page.userInput = data;
+        }
+        sabio.page.setValues = function () {
+            $('.getblogDetails').val(sabio.page.getblogInfo());//passing from Load Blog Details to rightside of page
+        }
+        sabio.page.getblogInfo = function () {
+            var getblogDetails = sabio.page.userInput.authorName
+               + ' ' + sabio.page.userInput.authorEmail + ' ' + sabio.page.userInput.newblogPost;
+
+
+
+            return getblogDetails;
+        }
+        sabio.page.getBlog = function () {
+            return "Posted" + sabio.page.getblogInfo();
+        }
+        sabio.page.setBlog = function (newPost) {
+            $('#postBlog').text(newPost);
+        }
+    </script>
+</body>
+</html>

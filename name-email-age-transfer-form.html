@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Homework1</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <style>
+        html body {
+            background-color:aquamarine;
+        }
+        div {
+            float: left;
+            border-radius: 10px;
+           
+        }
+
+        #listAll {
+            
+        }
+
+        #addMember {
+            
+        }
+
+        #name:hover {
+            background-color: whitesmoke;
+             border-radius: 10px;
+            
+        }
+
+        #email:hover {
+            background-color: whitesmoke;
+             border-radius: 10px;
+            
+        }
+
+        #age:hover {
+            background-color: whitesmoke;
+             border-radius: 10px;
+            
+        }
+
+        #list:hover {
+            font-size: x-large;
+            background-color: #4CAF50;
+            border-radius: 10px;
+        }
+        #add:hover {
+             font-size: x-large;
+            background-color: #4CAF50;
+            border-radius: 10px;
+
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Members</h1>
+
+        <p></p>
+        <form>
+            Name:
+            <input type="text" id="name" class="clearable" placeholder="Enter your name" maxlength="24" />
+            <p></p>
+           
+           <p></p>Email:
+            <input type="text" id="email" class="clearable" placeholder="Enter your email" />
+            
+           
+           
+
+           
+            <p></p>Age:
+            <input type="text" id="age" class="clearable" placeholder="Enter your age" maxlength="2" />
+            <p></p>
+            <p1>
+                <input type="button" value="Add" id="add" />
+            </p1>
+
+            <p2>
+                <input type="button" value="List All" id="list" />
+            </p2>
+        </form>
+    </div>
+
+    <div class="col-md-4 container-fluid z-depth-4" id="div2" style="text-align:center">
+        <h2>List</h2>
+        <textarea rows="5" cols="50" id="listHere"></textarea>
+    </div>
+
+
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script src="http://sabioapi2.azurewebsites.net/scripts/sabio.js"></script>
+
+   
+    <script>   
+        
+        sabio.page.startUp = function () {
+            console.log('jquery is ready');
+            $("#add").on("click",  sabio.page.handlers.addMember);
+            $("#list").on("click", sabio.page.handlers.listAll);
+            
+        }
+        
+        sabio.page.handlers.addMember = function () {
+                var name = $("#name").val();
+                var email = $("#email").val();
+                var age = $("#age").val();
+                var userInfo = " Name: " + name + " Email: " + email + " Age: " + age + " ";
+                if (isNaN(age))
+                {
+                    alert("Please enter a valid age!")
+                }
+                else if (name == '' || email == '' || age == '')
+                {
+                    alert("Please enter in all required fields")
+                }
+                else
+                {
+                    memberList.push(userInfo);
+                    
+                   
+                }
+            };
+       
+        sabio.page.handlers.listAll = function () {
+            
+            $("#listHere").html(memberList + " | ")
+        }
+        
+        var memberList = [];
+        
+    
+    </script>
+</body>
+</html>
+

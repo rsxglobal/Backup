@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Homework1</title>
+    <meta charset="utf-8" />
+    <style>
+        form {
+            float: left;
+            padding: 10px;
+            background-color: #5ca999;
+            width: 45%;
+            margin: 5px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!--<form>
+
+        <
+            <h1>Lab 1/17/17</h1>
+            <h2>First Name:</h2>
+            <input type="text" id="firstName" placeholder="Put first name..." />
+            <h2>Last Name:</h2>
+            <input type="text" id="lastName" placeholder="Put last name..." />
+            <p></p>
+            <div>
+                <input type="button" value="Get Full Name!" id="getFullName" />
+                <input type="text" class="fullName" placeholder="Get full name..." />
+            </div>
+            <br />
+            <input type="button" value="Get Grettings!" id="getGreetings" />-->
+
+
+        <!--<span></span>-->
+
+        <!--<h2>First Name:</h2>
+        <input type="text" id="firstName" placeholder="Enter your first name">
+        <p></p>
+
+        <h2>Last Name:</h2>
+        <input type="text" id="lastName" placeholder="Enter last name" />
+
+        <p></p>
+
+        <div>
+            <input type="button" id="getFullName"value="Get Full Name!"  />
+            <input type="text" class="fullName" placeholder="Get full name..." />
+        </div>
+        <br />-->
+        <!--<input type="button" id="getGreetings" value="Get Greetings!"  />-->
+
+            <!--<input type="button" id="getFullName"value="Get Full Name"/>
+            <input type="text" class="fullName" placeholder="Get full name..."/>
+
+        <p></p>Full Name:
+        <input type="text" id="fullName"/>
+        <p></p>
+
+        <p>
+            <input type="button" value="Greeting" id="getGreetings" />
+        </p>
+
+        <p>-->
+            <!--<span></span>-->
+    <!--</form>-->
+
+    <form>
+        <h1>Lab 1/17/17</h1>
+        <h2>First Name:</h2>
+        <input type="text" id="firstName" placeholder="Put first name..." />
+        <h2>Last Name:</h2>
+        <input type="text" id="lastName" placeholder="Put last name..." />
+        <p></p>
+        <div>
+            <input type="button" value="Get Full Name!" id="getFullName" />
+            <input type="text" class="fullName" placeholder="Get full name..." />
+        </div>
+        <br />
+        <input type="button" value="Get Greetings!" id="getGreetings" />
+    </form>
+
+    <span></span>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script src="http://sabioapi2.azurewebsites.net/scripts/sabio.js"></script>
+
+    <script>
+        sabio.page.startUp = function (){
+            $('#getFullName').on('click', sabio.page.handlers.btnGetFullName);
+            $('#getGreetings').on('click', sabio.page.handlers.btnGetGreeting);
+        }
+        sabio.page.handlers.btnGetFullName = function (){
+            sabio.page.readValues();
+            sabio.page.setValues();
+        }
+            sabio.page.handlers.btnGetGreeting = function (){
+                var greeting = sabio.page.getGreeting();
+                sabio.page.setGreeting(greeting);
+            }
+        sabio.page.readValues = function () {
+            var firstName = $('#firstName').val();
+            var lastName = $('#lastName').val();
+            var data = {
+                firstName: firstName,
+                lastName: lastName
+            };
+            sabio.page.userInput = data;
+        }
+        sabio.page.setValues = function (){
+            $('.fullName').val(sabio.page.getFullName());
+        }
+        sabio.page.getFullName = function (){
+            var fullName = sabio.page.userInput.firstName + " " + sabio.page.userInput.lastName;
+            return fullName;
+        }
+        sabio.page.getGreeting = function (){
+            return "Good Evening " + sabio.page.getFullName();
+        }
+        sabio.page.setGreeting = function(greeting){
+            $('span').text(greeting);
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Homework1</title>
+    <meta charset="utf-8" />
+    <style>
+        div {
+            float: left;
+            padding: 10px;
+            background-color: lightgoldenrodyellow;
+            width: 30%;
+            /*height: 200px;*/
+            margin: 20px;
+        }
+
+        #name:hover {
+            background-color: whitesmoke;
+            /*color: white;*/
+        }
+
+        #name1:hover {
+            background-color: whitesmoke;
+            /*color: white;*/
+        }
+
+        #address:hover {
+            background-color: whitesmoke;
+            /*color: white;*/
+        }
+
+        #address1:hover {
+            background-color: whitesmoke;
+            /*color: white;*/
+        }
+
+        #country1:hover {
+            background-color: whitesmoke;
+            /*color: white;*/
+        }
+
+        #state1:hover {
+            background-color: whitesmoke;
+            /*color: white;*/
+        }
+
+        #city1:hover {
+            background-color: whitesmoke;
+            /*color: white;*/
+        }
+
+        #zipcode:hover {
+            background-color: whitesmoke;
+            /*color: white;*/
+        }
+
+        #zipcode1:hover {
+            background-color: whitesmoke;
+            /*color: white;*/
+        }
+
+        #copytoshipping:hover {
+            background-color: #4CAF50;
+            Green color: white;
+        }
+
+        #clear:hover {
+            background-color: #4CAF50;
+            Green color: white;
+        }
+
+        .big {
+            margin: 40px;
+            width: 200px;
+            height: 200px;
+        }
+
+        .smaller {
+            margin: 40px;
+            width: 200px;
+            height: 200px;
+        }
+
+        .red {
+            background: red;
+        }
+
+        .round {
+            border-radius: 50px;
+        }
+
+        .blue {
+            background: blue;
+        }
+
+        .square {
+            border-radius: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Billing Info</h2>
+        <form>
+            <p></p>
+
+            Name:
+            <input type="text" id="name" class="clearable" placeholder="Enter your name" maxlength="24" />
+            <p></p>
+
+            <p></p>Address:
+            <input type="text" id="address" class="clearable" placeholder="Enter street address" />
+            <p></p>
+            <label>Select Country:</label>
+            <select id="countryID" class="countries clearable" name="countryID">
+                <option value="">Select Country</option>
+            </select>
+
+            <p></p>
+            <label>Select State:</label>
+            <select id="stateID" class="states clearable" name="stateID">
+                <option value="">Select State</option>
+            </select>
+
+            <p></p>
+            <label>Select City:</label>
+            <select id="cityID" class="cities clearable" name="cityID">
+                <option value="">Select City</option>
+            </select>
+
+            <p></p>ZipCode:
+            <input type="text" id="zipcode" class="clearable" Enter zipcode " maxlength="5" />
+            <p></p>
+            <p1>
+                <input type="button" value="Copy to Shipping!" id="copytoshipping" />
+            </p1>
+        </form>
+    </div>
+    <div>
+        <h2>Shipping Info</h2>
+        <form>
+
+            <p></p>Name:
+            <input type="text" id="name1" class="clearable" Enter your name" maxlength="24" />
+
+            <p></p>Address:
+            <input type="text" id="address1" class="clearable" Enter street address" />
+            <p></p>Country:
+            <input type="text" id="country1" class="clearable" Enter Country abbreviation" />
+
+            <p></p>State:
+            <input type="text" id="state1" class="clearable" Enter Country abbreviation" maxlength="18" />
+
+            <p></p>City:
+            <input type="text" id="city1" class="clearable" Enter your city" maxlength="15" />
+
+            <p></p>ZipCode:
+            <input type="text" id="zipcode1" class="clearable" Enter zipcode" maxlength="5" />
+            <p></p>
+
+            <p2>
+                <input type="button" value="Clear!" id="clear" />
+            </p2>
+        </form>
+    </div>
+
+   
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://iamrohit.in/lab/js/location.js"></script>
+
+    <script type="text/javascript">
+       
+
+        $(document).ready(function () {
+            $("#copytoshipping").on("click", copyValues);
+            $("#clear").on("click", clearAll);
+
+        });
+        var copyValues = function () {
+            $("#name1").val($("#name").val());
+            $("#address1").val($("#address").val());
+            $("#country1").val($("#countryID").val());
+            $("#state1").val($("#stateID").val());
+            $("#city1").val($("#cityID").val());
+            $("#zipcode1").val($("#zipcode").val());
+
+        };
+
+        var clearAll = function () {    //easier way to clear
+            $('.clearable').val('');
+        }
+    </script>
+</body>
+</html>
+
+
+
+   

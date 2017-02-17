@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <style>
+        h2 {
+            text-align: center;
+            font-weight: 600;
+        }
+
+        p {
+            font-family: 'Helvetica';
+            font-size: 18px;
+        }
+
+        #lineBox {
+            width: 220px;
+            margin: auto;
+            text-align: center;
+        }
+
+        #line {
+            text-align: center;
+            border-bottom: 1px solid black;
+            bottom: 50px;
+        }
+
+        #div1 {
+            float: left;
+            padding: 10px;
+            box-shadow: 0 0 30px black;
+            background-color: #98ccff;
+            margin-left: 50px;
+            margin-top: 50px;
+        }
+
+        #div2 {
+            float: right;
+            padding: 10px;
+            box-shadow: 0 0 30px black;
+            background-color: #98ccff;
+            margin-right: 50px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-6 container-fluid z-depth-4" id="div1" style="text-align:center">
+            <h2>Members</h2>
+            <form action="./" method="get" id="form" name="form">
+                <div id="lineBox">
+                    <p id="line">Name</p>
+                </div>
+                <input type="text" id="name" placeholder="Enter your name here" maxlength="25" />
+                <p></p>
+                <div id="lineBox">
+                    <p id="line">Email</p>
+                </div>
+                <input type="text" id="email" placeholder="Enter your email here" />
+                <p></p>
+                <div id="lineBox">
+                    <p id="line">Age</p>
+                </div>
+                <input type="text" id="age" placeholder="Enter your age here" />
+                <p></p>
+                <input type="button" class="btn btn-primary" value="Add" id="add" />
+                <input type="button" class="btn btn-primary" value="List All" id="list" />
+            </form>
+        </div>
+        <div class="col-md-4 container-fluid z-depth-4" id="div2" style="text-align:center">
+            <h2>List</h2>
+            <p id="listHere"></p>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+       $(document).ready(function () {
+           console.log("jQuery is ready");
+           $("#add").on("click", addMember);
+           $("#list").on("click", listAll);
+       });
+       var memberList = [];
+       var addMember = function () {
+           var name = $("#name").val();
+           var email = $("#email").val();
+           var age = $("#age").val();
+           var userInfo = "Name: " + name + " Email: " + email + " Age: " + age;
+           if (isNaN(age))
+           {
+               alert("Please enter a valid age!")
+           }
+           else if (name == '' || email == '')
+           {
+               alert("Please enter in all required fields")
+           }
+           else
+           {
+               memberList.push(userInfo);
+           }
+       };
+
+       var listAll = function () {
+           $("#listHere").text(memberList)
+       }
+
+
+       /* can use the ".clearable" class for all fields you wish to clear:
+       var clearAll = function(){
+           $(".clearable").val("");
+       }
+       then add the class to each field you want to be clearable*/
+
+    </script>
+</body>
+</html>

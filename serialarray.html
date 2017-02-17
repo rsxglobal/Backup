@@ -1,0 +1,219 @@
+﻿<!--<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>serializeArray demo</title>
+    <style>
+        body, select {
+            font-size: 14px;
+        }
+
+        form {
+            margin: 5px;
+        }
+
+        p {
+            color: red;
+            margin: 5px;
+        }
+
+        b {
+            color: blue;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+
+    <p><b>Results:</b> <span id="results"></span></p>
+    <form>
+        <select name="single">
+            <option>Single</option>
+            <option>Single2</option>
+        </select>
+        <select name="multiple" multiple="multiple">
+            <option selected="selected">Multiple</option>
+            <option>Multiple2</option>
+            <option selected="selected">Multiple3</option>
+        </select>
+        <br>
+        <input type="checkbox" name="check" value="check1" id="ch1">
+        <label for="ch1">check1</label>
+        <input type="checkbox" name="check" value="check2" checked="checked" id="ch2">
+        <label for="ch2">check2</label>
+        <input type="radio" name="radio" value="radio1" checked="checked" id="r1">
+        <label for="r1">radio1</label>
+        <input type="radio" name="radio" value="radio2" id="r2">
+        <label for="r2">radio2</label>
+    </form>-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forms</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+       div {
+            background-color: white;
+            margin: 20px;
+        }
+
+        body {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+
+        <h1>JS PreWork - Sabio</h1>
+        <h2>Registration Form</h2>
+        <form id="registrationForm">
+            <div>
+                Name:<br>
+                <input type="text" id="name">
+            </div>
+            <div>
+                Email:<br>
+                <input type="email" id="email" name="user-email">
+            </div>
+            <div>
+                Gender:<br>
+                <input type="radio" id="male" name="gender" value="Male"> Male<br>
+                <input type="radio" id="female" name="gender" value="Female"> Female<br>
+            </div>
+            <div>
+                Education:<br>
+                <select id="education" name="edu">
+                    <option>High School</option>
+                    <option>Under Graduate</option>
+                    <option>Graduate</option>
+                    <option>Doctorate</option>
+                </select>
+            </div>
+            <div>
+
+                <input type="checkbox" id="agree" name="termsAccepted" value="true"> I agree with Terms and Conditions.
+            </div>
+            <div>
+                <input type="button" id="showValues" value="Show Values">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="clearValues" value="Clear Values">
+            </div>
+        </form>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://sabioapi2.azurewebsites.net/scripts/sabio.js"></script>
+
+        <script type="text/javascript">
+
+            sabio.page.startUp = function () {
+
+                //.on( events, handler )
+                //Attach an event handler function for one or more events to the selected elements.
+                //http://api.jquery.com/on/
+
+                $('#showValues').on("click", sabio.page.handlers.showValues);
+
+                $('#clearValues').on("click", sabio.page.handlers.clearValues);
+
+            }
+
+            sabio.page.handlers.showValuesOneLine = function () {
+                var str = $("#registrationForm").serialize();
+                console.log(str);
+            }
+
+            sabio.page.handlers.formToArray = function () {
+                var str = $("#registrationForm").serializeArray();
+                console.log(str);
+            }
+
+            sabio.page.handlers.showValues = function () {
+
+                console.log(sabio.page.readFormValues());
+            }
+
+            sabio.page.handlers.clearValues = function () {
+
+                console.log(sabio.page.writeEmptyValues());
+            }
+
+            sabio.page.readFormValues = function () {
+
+                // .val()
+                // Get the current value of the first element in the set of matched elements or set the value of every matched element.
+                //http://api.jquery.com/val/
+
+                var nameVal = $("#name").val();
+                var emailVal = $("#email").val();
+                var genderVal = $("input[name='gender']:checked").val();
+                var educationVal = $("#education").val();
+
+                // .prop()
+                // Get the value of a property for the first element in the set of matched elements or set one or more properties for every matched element.
+                //http://api.jquery.com/prop/
+                var agreeVal = $("#agree").prop("checked");
+
+                var formValues = "Name: " + nameVal + ", Email: " + emailVal + ", Gender: " + genderVal + ", Education: " + educationVal + ", Agree: " + agreeVal;
+
+                return formValues;
+            }
+
+            sabio.page.writeEmptyValues = function () {
+
+                sabio.page.setName("");
+                sabio.page.setEmail("");
+                sabio.page.setGender("");
+                sabio.page.setEducation("");
+                sabio.page.setAgree(false);
+
+                //alternate - use HTML form reset function.
+                //this resets all the elements within the form
+                //$("#registrationForm")[0].reset();
+            }
+
+            sabio.page.setName = function (nameVal) {
+                // .val()
+                // Get the current value of the first element in the set of matched elements or set the value of every matched element.
+                //http://api.jquery.com/val/
+
+                $("#name").val(nameVal);
+            }
+
+            sabio.page.setEmail = function (emailVal) {
+                // .val()
+                // Get the current value of the first element in the set of matched elements or set the value of every matched element.
+                //http://api.jquery.com/val/
+
+                $("#email").val(emailVal);
+            }
+
+            sabio.page.setGender = function (genderVal) {
+                // .prop()
+                // Get the value of a property for the first element in the set of matched elements or set one or more properties for every matched element.
+                //http://api.jquery.com/prop/
+
+                if (genderVal == "") //unselect all radio buttons
+                    $("input[name='gender']").prop("checked", false);
+                else
+                    $("input[name='gender'][value='" + genderVal + "']").prop("checked", true);
+            }
+
+            sabio.page.setEducation = function (educationVal) {
+                // .prop()
+                // Get the value of a property for the first element in the set of matched elements or set one or more properties for every matched element.
+                //http://api.jquery.com/prop/
+
+                $("#education").val(educationVal);
+            }
+
+            sabio.page.setAgree = function (agreeVal) {
+                // .prop()
+                // Get the value of a property for the first element in the set of matched elements or set one or more properties for every matched element.
+                //http://api.jquery.com/prop/
+
+                $("#agree").prop("checked", agreeVal);
+            }
+        </script>
+    < />
+</body>
+</html>

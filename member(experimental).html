@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Homework1</title>
+    <meta charset="utf-8" />
+    <style>
+        div {
+            float: left;
+            font-size: x-large;
+            padding: 30px;
+            background-color: lightgray;
+            width: 30%;
+            height: 500px;
+            margin: 30px;
+            text-align: left;
+        }
+
+        #listAll {
+            font-size: x-large;
+        }
+
+        #addMember {
+            font-size: x-large;
+        }
+
+        #name:hover {
+            background-color: whitesmoke;
+            /*color: white;*/
+        }
+
+        #email:hover {
+            background-color: whitesmoke;
+            /*color: white;*/
+        }
+
+        #age:hover {
+            background-color: whitesmoke;
+            /*color: white;*/
+        }
+
+        #listAll:hover {
+            font-size: x-large;
+            background-color: #4CAF50;
+            Green color: white;
+        }
+
+        #addMember:hover {
+            font-size: x-large;
+            background-color: #4CAF50;
+            Green color: white;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Members</h1>
+
+            <p></p>
+        <form>
+            Name:
+            <input type="text" id="name" class="clearable" placeholder="Enter your name" maxlength="24" />
+            <p></p>
+        <!--</form>-->
+            <!--<p></p>Email:
+            <input type="text" id="email" class="clearable" placeholder="Enter your email" />-->
+        <!--<form>-->
+            <p>Enter an email address:</p>
+            <input id='email'>
+            <button type='submit' id='validate'>Validate!</button>
+        <!--</form>-->
+
+        <h2 id='result'></h2>
+
+        <!--<form>-->
+            <p></p>Age:
+            <input type="text" id="age" class="clearable" placeholder="Enter your age" maxlength="2" />
+            <p></p>
+            <p1>
+                <input type="button" value="Add" id="add" />
+            </p1>
+
+            <p2>
+                <input type="button" value="List All" id="list" />
+            </p2>
+        </form>
+    </div>
+
+    <div class="col-md-4 container-fluid z-depth-4" id="div2" style="text-align:center">
+        <h2>List</h2>
+        <p id="listHere"></p>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://iamrohit.in/lab/js/location.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            console.log("jQuery is ready");
+            $("#add").on("click", addMember);
+            $("#list").on("click", listAll);
+        });
+        var memberList = [];
+        var addMember = function () {
+            var name = $("#name").val();
+            var email = $("#email").val();
+            var age = $("#age").val();
+            var userInput = "Name: " + name + " Email: " + email + " Age: " + age + '<br />';
+            {
+                memberList.push(userInput)
+            }
+        };
+
+        var listAll = function () {
+            $("#listHere").text(memberList)
+        }
+
+        /* can use the ".clearable" class for all fields you wish to clear:
+        var clearAll = function(){
+            $(".clearable").val("");
+        }
+        then add the class to each field you want to be clearable*/
+
+
+        //function validateEmail(email) {
+        //    var re = /\S+@\S+\.\S+/;
+        //    return re.test(email);
+        //}
+
+        function validateEmail(email) {
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+
+        function validate() {
+            $("#result").text("");
+            var email = $("#email").val();
+            if (validateEmail(email)) {
+                $("#result").text(email + " is valid :)");
+                $("#result").css("color", "green");
+            } else {
+                $("#result").text(email + " is not valid :(");
+                $("#result").css("color", "red");
+            }
+            return false;
+        }
+
+        $("#validate").bind("click", validate);
+    </script>
+</body>
+</html>
+
+<!--<script type="text/javascript">
+        var members = [];
+
+        $(document).ready(function () {
+            $("#copyValues").on("click", copyValues);
+            $("#listAll").on("click", listAll);
+
+        });
+
+        var copyValues = function () {
+            var member = {
+                name: $("#name").val(),
+                email: $("#email").val(),
+                age: $("#age").val()
+            }
+            members.push(member)
+        }
+
+        var listAll = function () {
+            var output = "";
+            for (var i = 0; i < members.length; i++) {
+                var member = members[i];
+                output += " " + member.name + ' ' + member.email + ' ' + member.age;
+                if (isNaN(age)) {
+                    alert("Please enter a valid age!")
+                }
+                else if (name == '' || email == '') {
+                    alert("Please enter in all required fields")
+                }
+                else {
+                }
+
+                $("#box").val(output);
+            }
+        }
+    </script>-->

@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <style>
+        form {
+            float: left;
+            padding: 10px;
+            background-color: darkkhaki;
+            width: 80%;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: yellow;
+        }
+
+
+        .big {
+            font-size: 1.2em;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .fonty {
+            font-family: 'Bodoni MT Poster';
+            font-size: 1.3em;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <h1>CRAZY BUTTON WORLD</h1>
+        <h2>First Name:</h2>
+        <input type="text" id="firstName" placeholder="input first name" />
+        <h2>Last Name:</h2>
+        <input type="text" id="lastName" placeholder="Input last name..." />
+        <h2>Email:</h2>
+        <input type="text" id="email" placeholder="Insert email" />
+        <p></p>
+        <div>
+            <input type="button" id="getFullName" value="Get Full Name!" />
+        </div>
+        <br />
+        <div>
+            <input type="text" class="fullName" placeholder="Get full name..." />
+            <br />
+        </div>
+        <br />
+        <div class="boxed">
+            <span></span>
+        </div>
+        <br />
+        <input type="button" id="getGreetings" value="Get Greetings!" />
+        <input type="button" id="maketextBigger" value="Bigger!" />
+        <input type="button" id="maketextSmaller" value="Smaller!" />
+        <input type="button" id="changeFont" value="Change Font" />
+        <input type="button" id="makebackgroundBlue" value="Change to Blue" />
+        <input type="button" id="makebackgroundRed" value="Change to Red" />
+        <input type="button" id="resetBackground" value="Reset Color" />
+    </form>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="http://sabioapi2.azurewebsites.net/scripts/sabio.js"></script>
+    <script>
+        sabio.page.startUp = function () {
+            $("#getFullName").on('click', sabio.page.handlers.btnGetFullName);
+            $("#getGreetings").on('click', sabio.page.handlers.btnGetGreeting);
+            $("#maketextBigger").on("click",
+                sabio.page.handlers.btnmaketextBigger);
+            $("#maketextSmaller").on("click", sabio.page.handlers.btnmaketextSmaller);
+            $("#changeFont").on("click", sabio.page.handlers.btnchangeFont);
+            $("#makebackgroundBlue").on("click",
+                sabio.page.handlers.btnmakebackgroundBlue);
+            $("#makebackgroundRed").on("click",
+                    sabio.page.handlers.btnmakebackgroundRed);
+            $("#resetBackground").on("click",
+                        sabio.page.handlers.btnresetBackground);
+        }
+        sabio.page.handlers.btnGetFullName = function () {
+            sabio.page.readValues();
+            sabio.page.setValues();
+        }
+        sabio.page.handlers.btnGetGreeting = function () {
+            var greeting = sabio.page.getGreeting();
+            sabio.page.setGreeting(greeting);
+        }
+        sabio.page.handlers.btnmaketextBigger = function () {
+            $("#getFullName, #lastName, #firstName, #email").addClass("big");
+            $("#getGreetings, #maketextBigger, #maketextSmaller, #changeFont, #makebackgroundBlue, #makebackgroundRed").addClass("big");
+        }
+        sabio.page.handlers.btnmaketextSmaller = function () {
+            $("form").removeClass("big fonty");
+            $("#getGreetings, #maketextBigger, #maketextSmaller, #changeFont").removeClass("big");
+            $("#makebackgroundBlue, #makebackgroundRed").removeClass("big");
+            $("#getFullName, #lastName, #firstName, #email").removeClass("big");
+        }
+        sabio.page.handlers.btnchangeFont = function () {
+            $("form").addClass("fonty");
+        }
+        sabio.page.handlers.btnmakebackgroundBlue = function () {
+            $('form').addClass("blue");
+        }
+        sabio.page.handlers.btnmakebackgroundRed = function () {
+            $('form').addClass("red");
+        }
+        sabio.page.handlers.btnresetBackground = function () {
+            $('form').removeClass("red blue big");
+        }
+        sabio.page.readValues = function () {
+            var firstName = $('#firstName').val();
+            var lastName = $('#lastName').val();
+            var email = $('#email').val();
+            var data = {
+                firstName: firstName,
+                lastName: lastName,
+                email: email
+            };
+            sabio.page.userInput = data;
+        }
+        sabio.page.setValues = function () {
+            $('.fullName').val(sabio.page.getFullName());
+        }
+        sabio.page.getFullName = function () {
+            var fullName = sabio.page.userInput.firstName + ' ' + sabio.page.userInput.lastName + ' ' + sabio.page.userInput.email;
+            return fullName;
+        }
+        sabio.page.getGreeting = function () {
+            return "Good Evening " + sabio.page.getFullName();
+        }
+        sabio.page.setGreeting = function (greeting) {
+            $('span').text(greeting)
+        }
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Homework1</title>
+    <meta charset="utf-8" />
+    <style>
+        /*Notice that style goes input the head*/
+        div {
+            float: left;
+            padding: 10px;
+            background-color: #eee;
+            width: 45%;
+            margin: 5px;
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Billing Info</h2>
+        <form>
+            <p>Name:</p>
+            <input type="text" id="name" placeholder="Enter your name" maxlength="15" />
+            <p>Address:</p>
+            <input type="text" id="address" placeholder="Enter street address" />
+            <p>City:</p>
+            <input type="text" id="city" placeholder="Enter your city" maxlength="15" />
+            <p>State:</p>
+            <input type="text" id="state" placeholder="Enter state abbreviation" maxlength="2" />
+            <p>ZipCode:</p>
+            <input type="text" id="zipcode" placeholder="Enter zipcode " maxlength="5" />
+
+            //  <p></p>
+            <input type="button" value="Copy to Shipping!" id="copytoshipping" />
+        </form>
+    </div>
+    <div>
+        <h2>Shipping Info</h2>
+        <form>
+            <p>Name:</p>
+            <input type="text" id="name1" placeholder="Enter your name" maxlength="15" />
+            <p>Address:</p>
+            <input type="text" id="address1" placeholder="Enter street address" />
+            <p>City:</p>
+            <input type="text" id="city1" placeholder="Enter your city" maxlength="15" />
+            <p>State:</p>
+            <input type="text" id="state1" placeholder="Enter state abbreviation" maxlength="2" />
+            <p>ZipCode:</p>
+            <input type="text" id="zipcode1" placeholder="Enter zipcode" maxlength="5" />
+            <p></p>
+            <input type="button" value="Clear!" id="clear" />
+        </form>
+    </div>
+
+    <!--
+        Jitin:
+        All you javascript should be together even if you have 2 forms.
+        Also, we always want javascript code right above closing </body> tag
+     -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> <!--//Notice the jquery is closed here-->
+    <script type="text/javascript">
+//JS is enclosed with script type
+        $(document).ready(function () {
+            $("#copytoshipping").on("click", copyValues);
+            $("#clear").on("click", clearValues);
+
+        });
+        var copyValues = function () {
+            $("#name1").val($("#address").val());
+            $("#address1").val($("#address").val());
+            $("#city1").val($("#city").val());
+            $("#state1").val($("#state").val());
+            $("#zipcode1").val($("#zipcode").val());
+        };
+
+        var clearValues = function () {
+            var clearAllValues = '#name1, #address1, #city1, #state1, #zipcode1, #name, #address, #city, #state, #zipcode';
+            $(clearAllValues).val('');
+        };
+    </script>
+</body>
+</html>

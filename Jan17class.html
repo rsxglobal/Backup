@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Homework1</title>
+    <meta charset="utf-8" />
+    <style>
+        div {
+            float: left;
+            background-color: darkslategrey;
+        /*}
+        p.hidden {
+            visibility: hidden*/
+            /*}
+        #goodEvening {
+            display: none;
+        }*/
+
+    </style>
+</head>
+<body>
+
+    <form>
+
+        First Name:
+        <input type="text" id="firstName" placeholder="Enter your first name" />
+        <p></p>
+
+        <p></p>Last Name:
+        <input type="text" id="lastName" placeholder="Enter last name" />
+
+        <p></p>
+        <p>
+            <input type="button" value="Get Full Name" id="copyValues" />
+        </p>
+
+        <p></p>Full Name:
+        <input type="text" style="display:none"  id="getfullName"/>
+        <p></p>
+
+        <p>
+            <input type="button" value="Greeting" id="goodEvening"/>
+        </p>
+
+        <p>
+            <span></span>
+        </p>
+</form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://iamrohit.in/lab/js/location.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#copyValues").on("click", copyValues);
+            $("#goodEvening").on("click", goodEvening);
+            $("#getfullName").hide();
+
+        });
+
+        var copyValues = function () {
+            var person = {
+                firstName: $("#firstName").val(), //.val = value read input box
+                lastName: $("#lastName").val(),
+
+                //var firstName = $("#firstName").val();
+                //var lastName = $("#lastName").val();
+                //var fullName = $("#fullName").val();
+                //$("fullName").val(fullName);
+
+
+            }
+            persons.push(person)
+            getfullName();
+        }
+
+        var persons = [];
+        var getfullName = function () {
+            var output = "";
+            for (var i = 0; i < persons.length; i++) {
+                var person = persons[i];
+                output += " " + person.firstName + ' ' + person.lastName;
+            };
+
+            $("#getfullName").val(output);
+            $("#getfullName").show();
+
+        }
+        var goodEvening = function () {
+            var output = "";
+            for (var i = 0; i < persons.length; i++) {
+                var person = persons[i];
+                output += " " + person.firstName + ' ' + person.lastName;
+            };
+            $("span").text("Good Evening " + output);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <div>
+        <div class="blog-post col-md-6 container" id="postContainer">
+            <h2 class="blog-post-title">Blog Title</h2>
+            <p>
+                <span></span>
+            </p>
+
+        </div>
+
+
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script src="http://sabioapi2.azurewebsites.net/scripts/sabio.js"></script>
+    <script>
+        sabio.page.startup = function () {
+            console.log(lineChartData);
+        }
+        var lineChartData = {
+            date: new Date(2009, 10, 2),
+            value: 5
+        };
+
+        //var charData {
+        //    date: new Date(2009, 10, 25),
+        //    value: 30
+        //};
+
+        //var dog {
+        //    date: new Date(2009, 10, 26),
+        //    value: 72,
+        //    customBullet: "images/redstar.png"
+        //};
+
+
+
+    </script>
+</body>
+</html>
