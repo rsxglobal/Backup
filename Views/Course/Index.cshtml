@@ -1,0 +1,248 @@
+﻿
+@{
+    ViewBag.Title = "Courses";
+}
+
+<h2>Courses</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            <form>
+                <div class="form-group">
+                    <label for="Title">Course Title</label>
+                    <input type="text" class="form-control" id="title" placeholder="Title">
+                </div>
+                <div class="form-group">
+                    <label for="Start Date">Start Date</label>
+                    <input type="text" class="form-control" id="startDate" placeholder="Start Date">
+                </div>
+                <div class="form-group">
+                    <label for="fee">fee</label>
+                    <input type="text" class="form-control" id="fee" placeholder="Fee">
+                </div>
+                <div class="form-group">
+                    <label for="Fee">Description</label>
+                    <textarea type="text" class="form-control" id="description" rows="5" placeholder="Description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" placeholder="Enter ID to Update">
+                </div>
+
+
+                @*<button type="submit" class="btn btn-warning addCourse">Submit</button>*@
+                <input type="button" id="addCourse" class="btn btn-primary" value="Add Course" />
+                <input type="button" id="refresh" class="btn btn-success getAll" value="Get Courses" />
+                <input type="button" id="update" class="btn btn-warning" value="Update Course" />
+            </form>
+
+        </div>
+
+        <div class="col-sm-4">
+            <div class="course-list">
+                <div class="course item">
+                    <input type="button" class="btn btn-sm btn-danger delete pull-right" value="x" />
+                    <h4>
+                        JQuery
+                    </h4>
+                    <p class="startDate">Starting:<span>03/21/2107</span></p>
+                    <p class="fee">Fee:<span>$220.00</span></p>
+                    <p class="description">Description:<span>Yes, Finally you can experience Jquery!</span></p>
+                    <p class="courseId">ID:<span>122244</span></p>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@section Scripts{
+    <script type="text/javascript">
+        sabio.page.url = "http://localhost:49742/API/Courses/";
+        sabio.page.activecourseId = null;
+        sabio.page.startUp = function () {
+            console.log("Jquery is ready");
+            $(".getAll").on("click", sabio.page.getallCourses);
+            $("#addCourse").on("click", sabio.page.handlers.btnaddCourse);
+            $(".refresh").on("click", sabio.page.handlers.btnRefresh);
+            $(".course-list").on("click", ".delete", sabio.page.handlers.btnDelete);
+            $(".course-list").on("click", ".course", sabio.page.handlers.readCourse);
+            $("#update").on("click", sabio.page.handlers.btnupdateCourse);
+        }
+        
+        sabio.page.handlers.btnDelete = function () {
+            var course = $(this).closest(".course");//delete this since it is DOM
+            var id = $(course).find("p.courseId span").text();
+            console.log(id);
+            sabio.page.deleteCourse(id);
+            course.remove();
+        }
+        sabio.page.handlers.btnaddCourse = function () {
+            var title = $("#title").val();
+            var startDate = $("#startDate").val();
+            var fee = $("#fee").val();
+            var description = $("#description").val();
+            //var IsActive = $("#isActive").val();
+            
+            if (!sabio.page.activecourseId) {
+                sabio.page.addCourse(title, startDate, fee, description)
+            } else {
+                sabio.page.updateCourse(data);
+            }
+            $('form')[0].reset();
+        }
+        sabio.page.handlers.readCourse = function () {
+            var course = $(this);
+            sabio.page.activecourseId = course.find(".courseId span").text();
+            sabio.page.getCourseById(sabio.page.activecourseId);
+
+        }
+        sabio.page.handlers.btnupdateCourse = function () {
+            if (this.value == "Update Course") this.value = "Click to See Changes";
+            else this.value = "Update Course";
+            var courseId = $("#id").val();
+            var title = $("#title").val();
+            var startDate = $("#startDate").val();
+            var fee = $("#fee").val();
+            var description = $("#description").val();
+            var data = {
+                courseId: courseId,
+                title: title,
+                startDate: startDate,
+                fee: fee,
+                description, description
+            };
+            sabio.page.updateCourse(data);
+            $('form')[0].reset();
+            
+        }
+        sabio.page.getCourseById = function (id) {
+            var settings = {
+                type: "GET",
+                success: sabio.page.courseReceived,
+                error: sabio.page.requestFailed
+            };
+
+            $.ajax(sabio.page.url + id, settings);
+        }
+        sabio.page.setValues = function (data) {
+            var template = sabio.page.loadTemplate(); //load template
+            $("h4", template).text(data.title); //we change content inside template
+            $(".startDate", template).text(data.startDate);
+            $(".fee", template).text("$" + data.fee);
+            $(".description", template).text(data.description); //load comments
+            //$(".small", template).text(data.id); //load comments
+            $(".courseId span", template).text(data.courseId);
+            $(".delete", template).data("id", data.id);
+            $(".course-list").prepend(template);
+        }
+        sabio.page.addCourse = function (title, startDate, fee, description) {
+            console.log("addCourse firing");
+            var newCourse = {
+                title: title,
+                startDate: startDate,
+                fee: fee,
+                description: description,
+                //IsActive: IsActive
+            }
+            var settings = {
+                type: "POST",
+                success: sabio.page.lognewCourse,
+                error: sabio.page.requestFailed,
+                data: JSON.stringify(newCourse),
+                contentType: "application/json"     
+            };
+            $.ajax(sabio.page.url, settings);
+        }
+        sabio.page.courseReceived = function (data, status, xhr) {
+            $("#title").val(data.item.title);
+            $("#description").val(data.item.description);
+            $("#fee").val(data.item.fee);
+            $("#startDate").val(data.item.startDate);
+            $("#id").val(data.item.courseId);
+            $("#addCourse").val("Update Course");
+        }
+        sabio.page.updateCourse = function (data) {
+            data.courseId = sabio.page.activecourseId;
+            var settings = {
+                type: "PUT",
+                success: sabio.page.updateReceived,
+                error: sabio.page.requestFailed,
+                data: JSON.stringify(data),
+                contentType: "application/json"  
+            };
+            $.ajax(sabio.page.url + sabio.page.activecourseId, settings);
+        }
+        sabio.page.lognewCourse = function (data, status, xhr) {
+            console.log(data + '/' + status);        
+        }
+        //sabio.page.updateReceived = function (data, status, xhr) {
+        //    console.log(data + '/' + status);
+        //}
+        sabio.page.getallCourses = function () {
+            console.log("GetallCourses");
+            var settings = {
+                type: "GET",
+                success: sabio.page.dataReceived,
+                error: sabio.page.requestFailed
+            };
+            $.ajax(sabio.page.url, settings);
+        }
+   
+        sabio.page.deleteCourse = function (id) {
+            console.log("Delete");
+            var settings = {
+                type: "DELETE",
+                success: sabio.page.dataDeleted,
+                error: sabio.requestFailed
+            };
+            $.ajax(sabio.page.url + id, settings);
+        }
+        
+        sabio.page.dataReceived = function (data, status, xhr) {
+            $(".course-list").empty();
+            
+            for (var i = 0; i < data.items.length; i++) {
+                sabio.page.setValues(data.items[i]);
+                //template.data("cid", item.courseId);//comment this out if breaks
+                
+            }
+        }
+        sabio.page.loadTemplate = function () {
+            return $($("#template").html());
+        }
+        sabio.page.requestFailed = function (xhr, status, errorThrown) {
+            console.log(status + "-" + errorThrown);
+        }
+        sabio.page.updateReceived = function (data, status, xhr) {
+            $('form')[0].reset();
+            sabio.page.getallCourses()
+            sabio.page.activecourseId = null;
+            $("#").val("Add Course");
+        }
+       
+</script>
+
+<script type="text/html" id="template">  
+
+            <div class="course item">
+                <input type="button" class="btn btn-sm btn-danger delete pull-right" value="x" />
+                <h4>
+                    JQuery
+                </h4>
+                <p class="startDate">Starting:<span>03/21/2107</span></p>
+                <p class="fee">Fee:<span>$220.00</span></p>
+                <p class="description">Description:<span>Yes, Finally you can experience Jquery!</span></p>
+                <p class="courseId">ID:<span>122244</span></p>
+                </div>
+
+</script>
+    
+
+
+
+
+}
+
+
+
